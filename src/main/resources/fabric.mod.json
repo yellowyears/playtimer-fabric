@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "playtimer",
+  "version": "${version}",
+
+  "name": "Playtimer",
+  "description": "Play time in bottom-right corner, inspired by Grian/Scar/Joel's Hardcore Series",
+  "authors": [
+    "Bjarno"
+  ],
+  "contact": {
+    "homepage": "https://gitlab.com/Bjarno/",
+    "sources": "https://gitlab.com/Bjarno/playtimer-fabric"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/playtimer/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "be.bjarno.playtimer.PlaytimerMod"
+    ]
+  },
+  "mixins": [
+    "playtimer.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.12.12",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  },
+  "suggests": {
+  }
+}

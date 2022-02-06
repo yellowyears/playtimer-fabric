@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "be.bjarno.playtimer.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "GuiMixin",
+    "NetworkMixin",
+    "DisconnectMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
