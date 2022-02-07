@@ -1,5 +1,6 @@
 package be.bjarno.playtimer;
 
+import com.mojang.authlib.GameProfile;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ServerInfo;
@@ -24,8 +25,12 @@ public class GuiPlayTime {
     }
 
     private static GuiPlayTime INSTANCE = null;
-    public static GuiPlayTime getINSTANCE() {
+    public static GuiPlayTime getInstance() {
         if (INSTANCE == null) { LOGGER.debug("Creating instance!"); INSTANCE = new GuiPlayTime(); }
+        return INSTANCE;
+    }
+
+    public static GuiPlayTime getMaybeInstance() {
         return INSTANCE;
     }
 
@@ -42,21 +47,25 @@ public class GuiPlayTime {
     boolean running = false;
     Duration startDuration = null;
     LocalDateTime startTime = null;
+    boolean forceRefresh = false;
 
-    public void updateStats() {
+    public void checkStats() {
         if (minecraft.player == null) { return; }
 
-        if (!running) {
-            Duration savedDuration = Storage.getInstance().getDuration(worldName);
+        if (!running || forceRefresh) {
+            Duration savedDuration = Storage.getInstance().getDuration(timerId);
 
-            if (savedDuration == null) {
+            if (savedDuration == null || forceRefresh) {
                 int numberOfTicks = minecraft.player.getStatHandler().getStat(Stats.CUSTOM, Stats.PLAY_TIME);
                 int seconds = numberOfTicks / 20;
                 savedDuration = Duration.ofSeconds(seconds);
-                Storage.getInstance().saveDuration(worldName, savedDuration);
+                Storage.getInstance().saveDuration(timerId, savedDuration);
+
+                forceRefresh = false;
             }
 
             startDuration = savedDuration;
+            pauseDuration = Duration.ZERO;
             startTime = LocalDateTime.now();
             running = true;
         }
@@ -99,8 +108,19 @@ public class GuiPlayTime {
                 .minus(pauseDuration);
     }
 
+    public void reset() {
+        startTime = LocalDateTime.now();
+        startDuration = Duration.ZERO;
+        pauseDuration = Duration.ZERO;
+    }
+
+    public void syncWithServer() {
+        requestStatsRefresh();
+        forceRefresh = true;
+    }
+
     boolean isInit = false;
-    String worldName;
+    String timerId;
 
     public void init() {
         if (isInit) return;
@@ -109,19 +129,41 @@ public class GuiPlayTime {
         IntegratedServer iServer = minecraft.getServer();
         ServerInfo sInfo = minecraft.getCurrentServerEntry();
 
-        String name = "undefined";
+        String playmode = null;
+        String worldName = null;
+        String playerName = null;
+
+        if (minecraft.player != null) {
+            GameProfile profile = minecraft.player.getGameProfile();
+            if (profile == null) {
+                playerName = minecraft.player.getEntityName();
+            } else {
+                playerName = profile.getId().toString();
+            }
+        }
+
+        if (playerName == null) { playerName = "unknown"; }
+
         if (iServer != null) {
-            name = iServer.getSaveProperties().getLevelName();
+            worldName = iServer.getSaveProperties().getLevelName();
+            playmode = "SP";
         } else if (sInfo != null) {
             String address = sInfo.address;
             String[] parts = address.split(":");
             if (parts.length == 1) {
-                name = parts[0] + ":" + "25565";
+                worldName = parts[0] + ":" + "25565";
             } else if (parts.length == 2) {
-                name = parts[0] + ":" + parts[1];
+                worldName = parts[0] + ":" + parts[1];
             }
+            playmode = "MP";
         }
-        worldName = name;
+
+        if (playmode == null) {
+            timerId = "undefined";
+        } else {
+            timerId = playmode + "(" + worldName + "," + playerName + ")";
+        }
+
 
         // Ask for statistics...
         requestStatsRefresh();
@@ -132,15 +174,15 @@ public class GuiPlayTime {
     int counter = 5000;
     int initialCounter = counter;
 
-    public void syncTime(Duration duration) {
+    public void updateDurationInStorage(Duration duration) {
         if (duration == null) { return; }
-        Storage.getInstance().saveDuration(worldName, duration);
+        Storage.getInstance().saveDuration(timerId, duration);
         counter = initialCounter;
     }
 
     private void cleanUp() {
         Duration duration = getPlayTime();
-        syncTime(duration);
+        updateDurationInStorage(duration);
     }
 
     boolean oldPauseScreenState = false;
@@ -165,13 +207,19 @@ public class GuiPlayTime {
         if (oldPauseScreenState != pauseScreenState && pauseScreenState) { refresh = true; }
         oldPauseScreenState = pauseScreenState;
         if (counter <= 0 || refresh) {
-            syncTime(duration);
+            updateDurationInStorage(duration);
         }
 
         String hms = String.format("%02d:%02d:%02d",
                 duration.toHours(),
                 duration.toMinutesPart(),
                 duration.toSecondsPart());
+
+        if (forceRefresh) {
+            hms = "??:??:??";
+        }
+
+        if (!PlaytimerMod.timerVisible) { return; }
 
         // Draw the text in the bottom right corner of the screen.
         int xneed = minecraft.textRenderer.getWidth(hms);
@@ -187,4 +235,6 @@ public class GuiPlayTime {
         minecraft.textRenderer.drawWithShadow(stack, hms, xpos / scale, ypos / scale, 0xff5555);
         stack.pop();
     }
+
+
 }

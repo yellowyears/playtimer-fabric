@@ -9,6 +9,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Storage {
 
@@ -37,19 +39,48 @@ public class Storage {
         if (playTimeFile.exists()) {
             try {
                 try (BufferedReader bufferedReader = Files.newReader(playTimeFile, Charsets.UTF_8)) {
+                    LinkedList<String> lines = new LinkedList<>();
+
                     bufferedReader.lines().forEach((line) -> {
                         line = line.trim();
                         if (line.length() > 0) {
-                            String[] parts = line.split(separator);
-                            String name = parts[0];
-                            String rest = parts[1];
-                            if (!name.contains(" ")) {
-                                long millis = Long.parseLong(rest);
-                                Duration d = Duration.ofMillis(millis);
-                                map.put(name, d);
-                            }
+                            lines.add(line);
                         }
                     });
+
+
+                    if (!lines.isEmpty()) {
+                        int version = -1;
+
+                        String firstLine = lines.getFirst();
+                        if (firstLine.startsWith("version: ")) {
+                            version = Integer.parseInt(firstLine.substring(9));
+                        } else {
+                            version = 1;
+                        }
+
+                        Iterator<String> it = lines.iterator();
+                        if (version == 2) {
+                            it.next(); // Skip the version
+                        }
+
+                        if (version == 2 || version == 1) {
+                            while (it.hasNext()) {
+                                String line = it.next();
+                                String[] parts = line.split(separator);
+                                String name = parts[0];
+                                String rest = parts[1];
+                                if (!name.contains(" ")) {
+                                    long millis = Long.parseLong(rest);
+                                    Duration d = Duration.ofMillis(millis);
+                                    map.put(name, d);
+                                }
+                            }
+                        }
+                    }
+
+
+
                 }
             } catch (Exception e) {
                 LOGGER.error("Could not load existing playtimes...");
@@ -62,15 +93,11 @@ public class Storage {
     public void writeFile() {
         try {
             try (BufferedWriter bufferedWriter = Files.newWriter(playTimeFile, Charsets.UTF_8)) {
-                boolean first = true;
+                bufferedWriter.write("version: 2\n");
                 for (String name : playTimes.keySet()) {
                     Duration d = playTimes.getOrDefault(name, Duration.ZERO);
                     long millis = d.toMillis();
-                    if (!first) {
-                        bufferedWriter.write("\n");
-                    }
-                    bufferedWriter.write(name + separator + millis);
-                    first = false;
+                    bufferedWriter.write(name + separator + millis + "\n");
                 }
 
                 bufferedWriter.flush();

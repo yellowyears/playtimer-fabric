@@ -13,7 +13,7 @@ public abstract class NetworkMixin {
 
     @Inject(method="onStatistics", at=@At("TAIL"))
     public void afterStatisticsUpdate(StatisticsS2CPacket packet, CallbackInfo cb) {
-        GuiPlayTime.getINSTANCE().updateStats();
+        GuiPlayTime.getInstance().checkStats();
     }
 
 }

@@ -13,7 +13,7 @@ public abstract class GuiMixin {
 
 	@Inject(method="render", at=@At("HEAD"))
 	private void beforeRenderDebugScreen(MatrixStack stack, float f, CallbackInfo ci) {
-		GuiPlayTime.getINSTANCE().render(stack);
+		GuiPlayTime.getInstance().render(stack);
 	}
 
 }
