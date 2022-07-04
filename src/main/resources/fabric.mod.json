@@ -6,20 +6,21 @@
   "name": "Playtimer",
   "description": "Play time in bottom-right corner, inspired by Grian/Scar/Joel's Hardcore Series",
   "authors": [
-    "Bjarno"
+    "Bjarno",
+    "yellowyears"
   ],
   "contact": {
-    "homepage": "https://gitlab.com/Bjarno/",
-    "sources": "https://gitlab.com/Bjarno/playtimer-fabric"
+    "homepage": "https://github.com/yellowyears",
+    "sources": "https://github.com/yellowyears/playtimer-fabric"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/playtimer/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "be.bjarno.playtimer.PlaytimerMod"
+      "net.yellowyears.playtimer.PlaytimerMod"
     ]
   },
   "mixins": [
@@ -29,7 +30,7 @@
   "depends": {
     "fabricloader": ">=0.12.12",
     "fabric": "*",
-    "minecraft": "1.18.x",
+    "minecraft": "~1.19",
     "java": ">=17"
   },
   "suggests": {

@@ -1,6 +1,6 @@
-package be.bjarno.playtimer.mixin;
+package net.yellowyears.playtimer.mixin;
 
-import be.bjarno.playtimer.GuiPlayTime;
+import net.yellowyears.playtimer.GuiPlayTime;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import org.spongepowered.asm.mixin.Mixin;

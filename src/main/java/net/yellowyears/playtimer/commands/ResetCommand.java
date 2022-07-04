@@ -1,10 +1,10 @@
-package be.bjarno.playtimer.commands;
+package net.yellowyears.playtimer.commands;
 
-import be.bjarno.playtimer.GuiPlayTime;
+import net.minecraft.text.Text;
+import net.yellowyears.playtimer.GuiPlayTime;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
-import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
-import net.minecraft.text.TranslatableText;
+import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 
 public class ResetCommand implements Command<FabricClientCommandSource> {
     @Override
@@ -12,7 +12,7 @@ public class ResetCommand implements Command<FabricClientCommandSource> {
         FabricClientCommandSource source = context.getSource();
         GuiPlayTime gui = GuiPlayTime.getMaybeInstance();
         if (gui != null) { gui.reset(); }
-        source.sendFeedback(new TranslatableText("playtimer.reset"));
+        source.sendFeedback(Text.translatable("playtimer.reset"));
         return 0;
     }
 }

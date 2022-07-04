@@ -1,11 +1,10 @@
-package be.bjarno.playtimer.commands;
+package net.yellowyears.playtimer.commands;
 
-import be.bjarno.playtimer.GuiPlayTime;
-import be.bjarno.playtimer.PlaytimerMod;
+import net.minecraft.text.Text;
+import net.yellowyears.playtimer.PlaytimerMod;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
-import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
-import net.minecraft.text.TranslatableText;
+import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 
 public class ToggleCommand implements Command<FabricClientCommandSource> {
     @Override
@@ -14,9 +13,9 @@ public class ToggleCommand implements Command<FabricClientCommandSource> {
         boolean newStatus = PlaytimerMod.toggle();
 
         if (newStatus) {
-            source.sendFeedback(new TranslatableText("playtimer.show"));
+            source.sendFeedback(Text.translatable("playtimer.show"));
         } else {
-            source.sendFeedback(new TranslatableText("playtimer.hide"));
+            source.sendFeedback(Text.translatable("playtimer.hide"));
         }
 
         return 0;

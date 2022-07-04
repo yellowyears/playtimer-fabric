@@ -1,13 +1,11 @@
-package be.bjarno.playtimer;
+package net.yellowyears.playtimer;
 
-import be.bjarno.playtimer.commands.HelpCommand;
-import be.bjarno.playtimer.commands.ResetCommand;
-import be.bjarno.playtimer.commands.SyncCommand;
-import be.bjarno.playtimer.commands.ToggleCommand;
-import com.mojang.brigadier.Command;
+import net.yellowyears.playtimer.commands.HelpCommand;
+import net.yellowyears.playtimer.commands.ResetCommand;
+import net.yellowyears.playtimer.commands.SyncCommand;
+import net.yellowyears.playtimer.commands.ToggleCommand;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
-import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

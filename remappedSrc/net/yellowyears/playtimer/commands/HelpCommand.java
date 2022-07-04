@@ -1,16 +1,15 @@
-package be.bjarno.playtimer.commands;
+package net.yellowyears.playtimer.commands;
 
-import be.bjarno.playtimer.GuiPlayTime;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 
 public class HelpCommand implements Command<FabricClientCommandSource> {
     @Override
     public int run(CommandContext<FabricClientCommandSource> context) {
         FabricClientCommandSource source = context.getSource();
-        source.sendFeedback(new TranslatableText("playtimer.help"));
+        source.sendFeedback(new TranslatableTextContent("playtimer.help"));
         return 0;
     }
 }

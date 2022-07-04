@@ -1,10 +1,10 @@
-package be.bjarno.playtimer.commands;
+package net.yellowyears.playtimer.commands;
 
-import be.bjarno.playtimer.GuiPlayTime;
+import net.yellowyears.playtimer.GuiPlayTime;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 
 public class SyncCommand implements Command<FabricClientCommandSource> {
     @Override
@@ -12,7 +12,7 @@ public class SyncCommand implements Command<FabricClientCommandSource> {
         FabricClientCommandSource source = context.getSource();
         GuiPlayTime gui = GuiPlayTime.getMaybeInstance();
         if (gui != null) { gui.syncWithServer(); }
-        source.sendFeedback(new TranslatableText("playtimer.sync"));
+        source.sendFeedback(new TranslatableTextContent("playtimer.sync"));
         return 0;
     }
 }

@@ -1,4 +1,4 @@
-package be.bjarno.playtimer;
+package net.yellowyears.playtimer;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.MinecraftClient;
