@@ -11,7 +11,8 @@
   ],
   "contact": {
     "homepage": "https://github.com/yellowyears",
-    "sources": "https://github.com/yellowyears/playtimer-fabric"
+    "sources": "https://github.com/yellowyears/playtimer-fabric",
+    "issues": "https://github.com/yellowyears/playtimer-fabric/issues"
   },
 
   "license": "MIT",

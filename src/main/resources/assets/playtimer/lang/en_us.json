@@ -4,6 +4,6 @@
   "playtimer.help": "/playtimer help -- shows this help message\n/playtimer sync -- synchronize the timer with the server\n/playtimer reset -- resets the timer to 00:00:00\n/playtimer toggle -- hide or show the timer",
   "playtimer.show": "[Playtimer] Showing timer...",
   "playtimer.hide": "[Playtimer] Hiding timer...",
-  "playtimer.option.colour": "[Playtimer] Sets colour of timer",
-  "playtimer.title": "playtimer"
+  "text.autoconfig.playtimer.option.colour": "Set colour of timer: Format as #123456",
+  "text.autoconfig.playtimer.title": "Playtimer Mod"
 }
