@@ -1,5 +1,7 @@
 package net.yellowyears.playtimer;
 
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.yellowyears.playtimer.commands.HelpCommand;
 import net.yellowyears.playtimer.commands.ResetCommand;
@@ -7,6 +9,7 @@ import net.yellowyears.playtimer.commands.SyncCommand;
 import net.yellowyears.playtimer.commands.ToggleCommand;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.yellowyears.playtimer.config.PlaytimerModConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,8 +24,14 @@ public class PlaytimerMod implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger("Playtimer");
 
+	public static final String MOD_ID = "playtimermod";
+	public static final String NAME = "Playtimer";
+
 	private static File hiddenfile = new File(".playtimer-hidden");
 	static boolean timerVisible = true;
+
+	public static PlaytimerModConfig config;
+
 
 	@Override
 	public void onInitialize() {
@@ -39,6 +48,8 @@ public class PlaytimerMod implements ModInitializer {
 					.executes(new HelpCommand())
 			);
 		});
+
+		AutoConfig.register(PlaytimerModConfig.class, Toml4jConfigSerializer::new);
 
 		loadVisible();
 	}

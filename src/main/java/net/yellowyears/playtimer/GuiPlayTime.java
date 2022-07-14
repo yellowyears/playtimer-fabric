@@ -1,6 +1,8 @@
 package net.yellowyears.playtimer;
 
 import com.mojang.authlib.GameProfile;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.math.Color;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ServerInfo;
@@ -9,6 +11,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.ClientStatusC2SPacket;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.stat.Stats;
+import net.yellowyears.playtimer.config.PlaytimerModConfig;
 import org.slf4j.Logger;
 
 import java.time.Duration;
@@ -23,6 +26,9 @@ public class GuiPlayTime {
     private GuiPlayTime() {
         minecraft = MinecraftClient.getInstance();
     }
+
+//    private PlaytimerModConfig config;
+//    private int colour;
 
     private static GuiPlayTime INSTANCE = null;
     public static GuiPlayTime getInstance() {
@@ -187,6 +193,19 @@ public class GuiPlayTime {
 
     boolean oldPauseScreenState = false;
 
+    public static int convertHEXtoDecimal(String HEX) {
+        String hex = HEX.replaceAll("#", "");
+        String digits = "0123456789ABCDEF";
+        hex = hex.toUpperCase();
+        int val = 0;
+        for (int i = 0; i < hex.length(); i++) {
+            char c = hex.charAt(i);
+            int d = digits.indexOf(c);
+            val = 16 * val + d;
+        }
+        return val;
+    }
+
     public void render(MatrixStack stack) {
         if (minecraft == null || minecraft.player == null || minecraft.world == null || minecraft.player.world == null) {
             return;
@@ -232,7 +251,9 @@ public class GuiPlayTime {
 
         stack.push();
         stack.scale(scale, scale, scale);
-        minecraft.textRenderer.drawWithShadow(stack, hms, xpos / scale, ypos / scale, 0xff5555);
+        PlaytimerModConfig config = AutoConfig.getConfigHolder(PlaytimerModConfig.class).getConfig();
+        int colour = convertHEXtoDecimal(config.colour);
+        minecraft.textRenderer.drawWithShadow(stack, hms, xpos / scale, ypos / scale, colour);
         stack.pop();
     }
 

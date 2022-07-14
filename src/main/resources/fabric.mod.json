@@ -21,6 +21,9 @@
   "entrypoints": {
     "main": [
       "net.yellowyears.playtimer.PlaytimerMod"
+    ],
+    "modmenu": [
+      "net.yellowyears.playtimer.config.PlaytimerModMenu"
     ]
   },
   "mixins": [
@@ -31,8 +34,10 @@
     "fabricloader": ">=0.12.12",
     "fabric": "*",
     "minecraft": "~1.19",
+    "spruceui": ">=3.2.0",
     "java": ">=17"
   },
   "suggests": {
+    "modmenu": ">=1.12.2"
   }
 }
