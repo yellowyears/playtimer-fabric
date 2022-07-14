@@ -10,5 +10,6 @@ import net.fabricmc.api.Environment;
 public class PlaytimerModMenu implements ModMenuApi{
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return parent -> AutoConfig.getConfigScreen(PlaytimerModConfig.class, parent).get();    }
+        return parent -> AutoConfig.getConfigScreen(PlaytimerModConfig.class, parent).get();
+    }
 }

@@ -2,7 +2,6 @@ package net.yellowyears.playtimer;
 
 import com.mojang.authlib.GameProfile;
 import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.math.Color;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ServerInfo;
@@ -21,14 +20,13 @@ public class GuiPlayTime {
 
     MinecraftClient minecraft;
 
+    PlaytimerModConfig config = AutoConfig.getConfigHolder(PlaytimerModConfig.class).getConfig();
+
     private static final Logger LOGGER = PlaytimerMod.LOGGER;
 
     private GuiPlayTime() {
         minecraft = MinecraftClient.getInstance();
     }
-
-//    private PlaytimerModConfig config;
-//    private int colour;
 
     private static GuiPlayTime INSTANCE = null;
     public static GuiPlayTime getInstance() {
@@ -251,9 +249,11 @@ public class GuiPlayTime {
 
         stack.push();
         stack.scale(scale, scale, scale);
-        PlaytimerModConfig config = AutoConfig.getConfigHolder(PlaytimerModConfig.class).getConfig();
-        int colour = convertHEXtoDecimal(config.colour);
+
+        String configColour = config.colour.replaceAll("\\s+","");
+        int colour = convertHEXtoDecimal(configColour);
         minecraft.textRenderer.drawWithShadow(stack, hms, xpos / scale, ypos / scale, colour);
+
         stack.pop();
     }
 
