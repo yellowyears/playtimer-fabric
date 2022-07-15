@@ -16,9 +16,10 @@ checking out this repository! Hopefully you can find it useful. **[Latest Releas
 
 # Features:
 
-- Playtimer Custom Colours: 
-  - Using ModMenu and ClothConfig, you can set a custom colour hex colour code to change the colour of the timer:
-  - ![Playtimer Custom Colours](src/main/resources/assets/playtimer/github/playtimer_colour.gif)
+- Custom Colours: 
+  - Using ModMenu and ClothConfig, you can set a custom colour hex colour code to change the colour of the timer: 
+  ![Playtimer Custom Colours](src/main/resources/assets/playtimer/github/playtimer_colour.gif)
+- Position Selector: Places the playtimer in the 4 corners of the screen
 
 # Commands:
 
@@ -37,6 +38,9 @@ this mod in future versions of Minecraft and Fabric** as I use it in my own play
 
 I also can attempt to fix and bugs and add any features. **If you would like to request a feature or report a bug please
 check the [issues page](https://github.com/yellowyears/playtimer-fabric/issues)**. I will get back to you as soon as possible!
+
+Please feel free to fork the project and make a pull request. **This may take me a long time to approve as I need to
+check whether it works, whether it is optimised and whether it is safe :)**
 
 # License:
 
