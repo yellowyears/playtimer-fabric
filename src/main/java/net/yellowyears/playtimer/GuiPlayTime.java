@@ -191,6 +191,9 @@ public class GuiPlayTime {
 
     boolean oldPauseScreenState = false;
 
+    float xOffset = 0f;
+    float yOffset = 0f;
+
     public void render(MatrixStack stack) {
         if (minecraft == null || minecraft.player == null || minecraft.world == null || minecraft.player.world == null) {
             return;
@@ -230,14 +233,37 @@ public class GuiPlayTime {
         int yneed = minecraft.textRenderer.fontHeight;
         Window mainWindow = minecraft.getWindow();
         float scale = 1.5f;
-        float offset = 0.965f;
-        int xpos = Math.round((mainWindow.getScaledWidth() - xneed * scale) * offset);
-        int ypos = Math.round((mainWindow.getScaledHeight() - yneed * scale) * offset);
+
+        // TOP LEFT: X=0.015 Y=0.025
+        // TOP RIGHT: X= 0.985 Y=0.025
+        // BOTTOM LEFT: X=0.025 Y=0.965
+        // BOTTOM RIGHT X=0.965 Y=0.965
+        switch(config.playtimerPosition){
+            case TOP_LEFT -> {
+                xOffset = 0.015f;
+                yOffset = 0.025f;
+            }
+            case TOP_RIGHT -> {
+                xOffset = 0.985f;
+                yOffset = 0.025f;
+            }
+            case BOTTOM_LEFT -> {
+                xOffset = 0.025f;
+                yOffset = 0.965f;
+            }
+            default -> {
+                xOffset = 0.965f;
+                yOffset = 0.965f;
+            }
+        }
+
+        int xPos = Math.round((mainWindow.getScaledWidth() - xneed * scale) * xOffset);
+        int yPos = Math.round((mainWindow.getScaledHeight() - yneed * scale) * yOffset);
 
         stack.push();
         stack.scale(scale, scale, scale);
 
-        minecraft.textRenderer.drawWithShadow(stack, hms, xpos / scale, ypos / scale, config.colour);
+        minecraft.textRenderer.drawWithShadow(stack, hms, xPos / scale, yPos / scale, config.colour);
 
         stack.pop();
     }
