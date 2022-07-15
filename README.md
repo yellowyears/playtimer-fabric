@@ -1,5 +1,5 @@
 # Playtimer: Forked from [Bjarno/playtimer-fabric](https://gitlab.com/Bjarno/playtimer-fabric) 
-[![License](https://img.shields.io/badge/license-MIT-yellow)](https://github.com/yellowyears/XR-SkeletonPoser/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-yellow)](https://github.com/yellowyears/playtimer-fabric/blob/f3d4de96094d574b9a4629d0a2d4c25807481cc7/LICENSE)
 [![Discord](https://img.shields.io/badge/discord-%20-blue)](https://discord.gg/Y6GpkRF)
 
 Playtimer for Fabric is a mod inspired by the [100 hours in hardcore series](https://youtu.be/tsvd0d1Q5Fg). Thank you for 
@@ -29,7 +29,7 @@ checking out this repository! Hopefully you can find it useful. **[Latest Releas
 
 # Additional Notes:
 
-I forked this from [Bjarno's GitLab repo](https://gitlab.com/Bjarnp/playtimer-fabric) and updated it to 1.19, then
+I forked this from [Bjarno's GitLab repo](https://gitlab.com/Bjarno/playtimer-fabric) and updated it to 1.19, then
 decided to try to add config which took a long time due to my limited knowledge of Fabric modding.
 
 However, **I will be supporting
