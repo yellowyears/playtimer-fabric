@@ -191,19 +191,6 @@ public class GuiPlayTime {
 
     boolean oldPauseScreenState = false;
 
-    public static int convertHEXtoDecimal(String HEX) {
-        String hex = HEX.replaceAll("#", "");
-        String digits = "0123456789ABCDEF";
-        hex = hex.toUpperCase();
-        int val = 0;
-        for (int i = 0; i < hex.length(); i++) {
-            char c = hex.charAt(i);
-            int d = digits.indexOf(c);
-            val = 16 * val + d;
-        }
-        return val;
-    }
-
     public void render(MatrixStack stack) {
         if (minecraft == null || minecraft.player == null || minecraft.world == null || minecraft.player.world == null) {
             return;
@@ -250,12 +237,9 @@ public class GuiPlayTime {
         stack.push();
         stack.scale(scale, scale, scale);
 
-        String configColour = config.colour.replaceAll("\\s+","");
-        int colour = convertHEXtoDecimal(configColour);
-        minecraft.textRenderer.drawWithShadow(stack, hms, xpos / scale, ypos / scale, colour);
+        minecraft.textRenderer.drawWithShadow(stack, hms, xpos / scale, ypos / scale, config.colour);
 
         stack.pop();
     }
-
 
 }
