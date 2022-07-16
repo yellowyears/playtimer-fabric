@@ -261,11 +261,9 @@ public class GuiPlayTime {
             }
         }
 
-        float maxScale = 3f;
+        float maxScale = 5f;
         int scalePercentage = config.scalePercentage;
         float scale = (scalePercentage * maxScale) / 100;
-
-        System.out.print(scale + "\n");
 
         int xPos = Math.round((mainWindow.getScaledWidth() - xneed * scale) * xOffset);
         int yPos = Math.round((mainWindow.getScaledHeight() - yneed * scale) * yOffset);
