@@ -2,21 +2,23 @@ package net.yellowyears.playtimer;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
+
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
-import net.yellowyears.playtimer.commands.HelpCommand;
-import net.yellowyears.playtimer.commands.ResetCommand;
-import net.yellowyears.playtimer.commands.SyncCommand;
-import net.yellowyears.playtimer.commands.ToggleCommand;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
-import net.yellowyears.playtimer.config.PlaytimerModConfig;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 import java.io.File;
 import java.io.IOException;
 
-import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
+import net.yellowyears.playtimer.commands.HelpCommand;
+import net.yellowyears.playtimer.commands.ResetCommand;
+import net.yellowyears.playtimer.commands.SyncCommand;
+import net.yellowyears.playtimer.commands.ToggleCommand;
+import net.yellowyears.playtimer.config.PlaytimerModConfig;
 
 public class PlaytimerMod implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
@@ -24,12 +26,8 @@ public class PlaytimerMod implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger("Playtimer");
 
-	public static final String MOD_ID = "playtimermod";
-	public static final String NAME = "Playtimer";
-
 	private static File hiddenfile = new File(".playtimer-hidden");
 	static boolean timerVisible = true;
-
 
 	@Override
 	public void onInitialize() {

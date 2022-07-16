@@ -1,10 +1,11 @@
 package net.yellowyears.playtimer;
 
+import org.slf4j.Logger;
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import com.mojang.authlib.GameProfile;
-import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.hud.DebugHud;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.client.util.Window;
@@ -12,17 +13,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.ClientStatusC2SPacket;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.stat.Stats;
-import net.minecraft.text.OrderedText;
-import net.minecraft.text.Style;
+
 import net.yellowyears.playtimer.config.PlaytimerModConfig;
-import org.slf4j.Logger;
-
-import java.text.DecimalFormat;
-import java.time.Duration;
-import java.time.LocalDateTime;
-
-import static net.minecraft.client.gui.DrawableHelper.drawCenteredText;
-import static net.minecraft.client.gui.DrawableHelper.drawCenteredTextWithShadow;
+import me.shedaniel.autoconfig.AutoConfig;
 
 public class GuiPlayTime {
 
@@ -199,11 +192,10 @@ public class GuiPlayTime {
 
     boolean oldPauseScreenState = false;
 
-    float xOffset = 0f;
-    float yOffset = 0f;
-
-    float xOffsetCaption = 0f;
-    float yOffsetCaption = 0f;
+    // Text renderer variables
+    float xOffset; float yOffset;
+    float xOffsetCaption; float yOffsetCaption;
+    float maxScale = 5f;
 
     public void render(MatrixStack stack) {
         if (minecraft == null || minecraft.player == null || minecraft.world == null || minecraft.player.world == null) {
@@ -244,18 +236,24 @@ public class GuiPlayTime {
         int yNeed = minecraft.textRenderer.fontHeight;
         Window mainWindow = minecraft.getWindow();
 
+        int xNeedCaption = minecraft.textRenderer.getWidth(config.caption);
+
+        // Prevent crash when config changes
         if(config.playtimerPosition == null) {
             config.playtimerPosition = PlaytimerModConfig.PlaytimerPosition.BOTTOM_RIGHT;
         }
 
-        float xPosCaption;
-        int xNeedCaption = minecraft.textRenderer.getWidth(config.caption);
-
-        float maxScale = 5f;
         int scalePercentage = config.scalePercentage;
         float scale = (scalePercentage * maxScale) / 100;
 
+        float xPosCaption;
+        int yPosCaption = Math.round((mainWindow.getScaledHeight() - yNeed * scale) * yOffsetCaption);
 
+        stack.push();
+        stack.scale(scale, scale, scale);
+
+        // Setting different offsets for different positions
+        // Needs re-doing, some are inconsistent
         // TOP LEFT: X=0.015 Y=0.025 : XS=0.0078, YS=0.085
         // TOP RIGHT: X=0.985 Y=0.025 : XS=0.985 YS=0.085
         // BOTTOM LEFT: X=0.025 Y=0.965: XS=0.02 YS=0.905
@@ -291,20 +289,16 @@ public class GuiPlayTime {
             }
         }
 
-
-        System.out.print(scale);
-
         int xPos = Math.round((mainWindow.getScaledWidth() - xNeed * scale) * xOffset);
         int yPos = Math.round((mainWindow.getScaledHeight() - yNeed * scale) * yOffset);
 
-        stack.push();
-        stack.scale(scale, scale, scale);
+        int colour = config.colour;
 
-        minecraft.textRenderer.drawWithShadow(stack, hms, xPos / scale, yPos / scale, config.colour);
+        // Render Timer
+        minecraft.textRenderer.drawWithShadow(stack, hms, xPos / scale, yPos / scale, colour);
 
-        int yPosCaption = Math.round((mainWindow.getScaledHeight() - yNeed * scale) * yOffsetCaption);
-
-        minecraft.textRenderer.drawWithShadow(stack, config.caption, xPosCaption / scale, yPosCaption / scale, config.colour);
+        //Render Caption
+        minecraft.textRenderer.drawWithShadow(stack, config.caption, xPosCaption / scale, yPosCaption / scale, colour);
 
         stack.pop();
     }

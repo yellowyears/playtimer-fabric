@@ -2,17 +2,20 @@ package net.yellowyears.playtimer.config;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import me.shedaniel.autoconfig.annotation.ConfigEntry.BoundedDiscrete;
+import me.shedaniel.autoconfig.annotation.ConfigEntry.ColorPicker;
+import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.Tooltip;
 import me.shedaniel.autoconfig.annotation.ConfigEntry.Gui.EnumHandler;
+
 
 @Config(name = "playtimer")
 public class PlaytimerModConfig implements ConfigData {
-    @ConfigEntry.ColorPicker
-    @ConfigEntry.Gui.Tooltip()
+    @ColorPicker
+    @Tooltip()
     public int colour = 0xFF5555;
 
     @EnumHandler(option = EnumHandler.EnumDisplayOption.BUTTON)
-    @ConfigEntry.Gui.Tooltip()
+    @Tooltip()
     public PlaytimerPosition playtimerPosition = PlaytimerPosition.BOTTOM_RIGHT;
 
     public enum PlaytimerPosition {
@@ -24,11 +27,11 @@ public class PlaytimerModConfig implements ConfigData {
         }
     }
 
-    @ConfigEntry.BoundedDiscrete(min = 1, max = 100)
-    @ConfigEntry.Gui.Tooltip()
+    @BoundedDiscrete(min = 1, max = 100)
+    @Tooltip()
     public int scalePercentage = 30; // 30% = 1.5f
 
-    @ConfigEntry.Gui.Tooltip()
+    @Tooltip()
     public String caption = "";
 
 }

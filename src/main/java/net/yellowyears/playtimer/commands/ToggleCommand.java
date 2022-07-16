@@ -1,10 +1,12 @@
 package net.yellowyears.playtimer.commands;
 
-import net.minecraft.text.Text;
-import net.yellowyears.playtimer.PlaytimerMod;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
+import net.minecraft.text.Text;
+
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
+
+import net.yellowyears.playtimer.PlaytimerMod;
 
 public class ToggleCommand implements Command<FabricClientCommandSource> {
     @Override
