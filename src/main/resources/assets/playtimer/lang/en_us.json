@@ -5,7 +5,7 @@
   "playtimer.show": "[Playtimer] Showing timer...",
   "playtimer.hide": "[Playtimer] Hiding timer...",
   "text.autoconfig.playtimer.option.colour": "Set colour of timer",
-  "text.autoconfig.playtimer.option.playtimerPosition": "Set position of playtimer to one of the 4 corners",
+  "text.autoconfig.playtimer.option.playtimerPosition": "Set position of timer to one of the 4 corners",
   "text.autoconfig.playtimer.title": "Playtimer Mod",
   "playtimer.theme.top_left": "Top Left",
   "playtimer.theme.top_right": "Top Right",

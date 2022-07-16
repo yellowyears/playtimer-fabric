@@ -232,7 +232,6 @@ public class GuiPlayTime {
         int xneed = minecraft.textRenderer.getWidth(hms);
         int yneed = minecraft.textRenderer.fontHeight;
         Window mainWindow = minecraft.getWindow();
-        float scale = 1.5f;
 
         // TOP LEFT: X=0.015 Y=0.025
         // TOP RIGHT: X= 0.985 Y=0.025
@@ -256,6 +255,10 @@ public class GuiPlayTime {
                 yOffset = 0.965f;
             }
         }
+
+        float maxScale = 5f;
+
+        float scale = (maxScale / config.scalePercentage) * 100;
 
         int xPos = Math.round((mainWindow.getScaledWidth() - xneed * scale) * xOffset);
         int yPos = Math.round((mainWindow.getScaledHeight() - yneed * scale) * yOffset);

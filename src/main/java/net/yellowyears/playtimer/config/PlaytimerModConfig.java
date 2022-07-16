@@ -22,4 +22,7 @@ public class PlaytimerModConfig implements ConfigData {
         }
     }
 
+    @ConfigEntry.BoundedDiscrete(min = 1, max = 100)
+    public int scalePercentage = 33; // 33 = 1.5f scale
+
 }

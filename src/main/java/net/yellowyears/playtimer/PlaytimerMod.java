@@ -30,8 +30,6 @@ public class PlaytimerMod implements ModInitializer {
 	private static File hiddenfile = new File(".playtimer-hidden");
 	static boolean timerVisible = true;
 
-	public static PlaytimerModConfig config;
-
 
 	@Override
 	public void onInitialize() {
