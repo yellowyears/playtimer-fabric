@@ -3,6 +3,8 @@ package net.yellowyears.playtimer;
 import com.mojang.authlib.GameProfile;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.hud.DebugHud;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.client.util.Window;
@@ -10,12 +12,17 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.ClientStatusC2SPacket;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.OrderedText;
+import net.minecraft.text.Style;
 import net.yellowyears.playtimer.config.PlaytimerModConfig;
 import org.slf4j.Logger;
 
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
+
+import static net.minecraft.client.gui.DrawableHelper.drawCenteredText;
+import static net.minecraft.client.gui.DrawableHelper.drawCenteredTextWithShadow;
 
 public class GuiPlayTime {
 
@@ -195,6 +202,9 @@ public class GuiPlayTime {
     float xOffset = 0f;
     float yOffset = 0f;
 
+    float xOffsetCaption = 0f;
+    float yOffsetCaption = 0f;
+
     public void render(MatrixStack stack) {
         if (minecraft == null || minecraft.player == null || minecraft.world == null || minecraft.player.world == null) {
             return;
@@ -230,48 +240,71 @@ public class GuiPlayTime {
         if (!PlaytimerMod.timerVisible) { return; }
 
         // Draw the text in the bottom right corner of the screen.
-        int xneed = minecraft.textRenderer.getWidth(hms);
-        int yneed = minecraft.textRenderer.fontHeight;
+        int xNeed = minecraft.textRenderer.getWidth(hms);
+        int yNeed = minecraft.textRenderer.fontHeight;
         Window mainWindow = minecraft.getWindow();
 
         if(config.playtimerPosition == null) {
             config.playtimerPosition = PlaytimerModConfig.PlaytimerPosition.BOTTOM_RIGHT;
         }
 
-        // TOP LEFT: X=0.015 Y=0.025
-        // TOP RIGHT: X= 0.985 Y=0.025
-        // BOTTOM LEFT: X=0.025 Y=0.965
-        // BOTTOM RIGHT X=0.965 Y=0.965
-        switch(config.playtimerPosition){
-            case TOP_LEFT -> {
-                xOffset = 0.015f;
-                yOffset = 0.025f;
-            }
-            case TOP_RIGHT -> {
-                xOffset = 0.985f;
-                yOffset = 0.025f;
-            }
-            case BOTTOM_LEFT -> {
-                xOffset = 0.025f;
-                yOffset = 0.965f;
-            }
-            default -> {
-                xOffset = 0.965f;
-                yOffset = 0.965f;
-            }
-        }
+        float xPosCaption;
+        int xNeedCaption = minecraft.textRenderer.getWidth(config.caption);
 
         float maxScale = 5f;
         int scalePercentage = config.scalePercentage;
         float scale = (scalePercentage * maxScale) / 100;
 
-        int xPos = Math.round((mainWindow.getScaledWidth() - xneed * scale) * xOffset);
-        int yPos = Math.round((mainWindow.getScaledHeight() - yneed * scale) * yOffset);
+
+        // TOP LEFT: X=0.015 Y=0.025 : XS=0.0078, YS=0.085
+        // TOP RIGHT: X=0.985 Y=0.025 : XS=0.985 YS=0.085
+        // BOTTOM LEFT: X=0.025 Y=0.965: XS=0.02 YS=0.905
+        // BOTTOM RIGHT X=0.965 Y=0.965: XS=0.96 YS=0.905
+        switch(config.playtimerPosition){
+            case TOP_LEFT -> {
+                xOffset = 0.01f;
+                yOffset = 0.025f;
+                xOffsetCaption = 0.0078f;
+                yOffsetCaption = 0.085f;
+                xPosCaption = Math.round((mainWindow.getScaledWidth() + xNeedCaption * scale) * xOffsetCaption);
+            }
+            case TOP_RIGHT -> {
+                xOffset = 0.985f;
+                yOffset = 0.025f;
+                xOffsetCaption = 0.985f;
+                yOffsetCaption = 0.085f;
+                xPosCaption = Math.round((mainWindow.getScaledWidth() - xNeedCaption * scale) * xOffsetCaption);
+            }
+            case BOTTOM_LEFT -> {
+                xOffset = 0.025f;
+                yOffset = 0.965f;
+                xOffsetCaption = 0.02f;
+                yOffsetCaption = 0.905f;
+                xPosCaption = Math.round((mainWindow.getScaledWidth() + xNeedCaption * scale) * xOffsetCaption);
+            }
+            default -> { // BOTTOM_RIGHT
+                xOffset = 0.965f;
+                yOffset = 0.965f;
+                xOffsetCaption = 0.96f;
+                yOffsetCaption = 0.905f;
+                xPosCaption = Math.round((mainWindow.getScaledWidth() - xNeedCaption * scale) * xOffsetCaption);
+            }
+        }
+
+
+        System.out.print(scale);
+
+        int xPos = Math.round((mainWindow.getScaledWidth() - xNeed * scale) * xOffset);
+        int yPos = Math.round((mainWindow.getScaledHeight() - yNeed * scale) * yOffset);
 
         stack.push();
         stack.scale(scale, scale, scale);
 
         minecraft.textRenderer.drawWithShadow(stack, hms, xPos / scale, yPos / scale, config.colour);
+
+        int yPosCaption = Math.round((mainWindow.getScaledHeight() - yNeed * scale) * yOffsetCaption);
+
+        minecraft.textRenderer.drawWithShadow(stack, config.caption, xPosCaption / scale, yPosCaption / scale, config.colour);
 
         stack.pop();
     }

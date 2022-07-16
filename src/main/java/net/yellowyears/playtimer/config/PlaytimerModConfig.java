@@ -28,4 +28,7 @@ public class PlaytimerModConfig implements ConfigData {
     @ConfigEntry.Gui.Tooltip()
     public int scalePercentage = 30; // 30% = 1.5f
 
+    @ConfigEntry.Gui.Tooltip()
+    public String caption = "";
+
 }
