@@ -13,7 +13,7 @@ public class PlaytimerModConfig implements ConfigData {
     @EnumHandler(option = EnumHandler.EnumDisplayOption.BUTTON)
     public PlaytimerPosition playtimerPosition = PlaytimerPosition.BOTTOM_RIGHT;
 
-    public static enum PlaytimerPosition {
+    public enum PlaytimerPosition {
         TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT;
 
         @Override
@@ -23,6 +23,6 @@ public class PlaytimerModConfig implements ConfigData {
     }
 
     @ConfigEntry.BoundedDiscrete(min = 1, max = 100)
-    public int scalePercentage = 33; // 33 = 1.5f scale
+    public int scalePercentage = 50; // 50% = 1.5f
 
 }

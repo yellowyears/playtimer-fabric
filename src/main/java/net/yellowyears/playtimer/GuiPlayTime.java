@@ -13,6 +13,7 @@ import net.minecraft.stat.Stats;
 import net.yellowyears.playtimer.config.PlaytimerModConfig;
 import org.slf4j.Logger;
 
+import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -233,6 +234,10 @@ public class GuiPlayTime {
         int yneed = minecraft.textRenderer.fontHeight;
         Window mainWindow = minecraft.getWindow();
 
+        if(config.playtimerPosition == null) {
+            config.playtimerPosition = PlaytimerModConfig.PlaytimerPosition.BOTTOM_RIGHT;
+        }
+
         // TOP LEFT: X=0.015 Y=0.025
         // TOP RIGHT: X= 0.985 Y=0.025
         // BOTTOM LEFT: X=0.025 Y=0.965
@@ -256,9 +261,11 @@ public class GuiPlayTime {
             }
         }
 
-        float maxScale = 5f;
+        float maxScale = 3f;
+        int scalePercentage = config.scalePercentage;
+        float scale = (scalePercentage * maxScale) / 100;
 
-        float scale = (maxScale / config.scalePercentage) * 100;
+        System.out.print(scale + "\n");
 
         int xPos = Math.round((mainWindow.getScaledWidth() - xneed * scale) * xOffset);
         int yPos = Math.round((mainWindow.getScaledHeight() - yneed * scale) * yOffset);
