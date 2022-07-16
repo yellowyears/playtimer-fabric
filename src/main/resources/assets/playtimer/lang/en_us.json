@@ -4,6 +4,24 @@
   "playtimer.help": "/playtimer help -- shows this help message\n/playtimer sync -- synchronize the timer with the server\n/playtimer reset -- resets the timer to 00:00:00\n/playtimer toggle -- hide or show the timer",
   "playtimer.show": "[Playtimer] Showing timer...",
   "playtimer.hide": "[Playtimer] Hiding timer...",
-  "text.autoconfig.playtimer.option.colour": "Set colour of timer: Format as #123456",
-  "text.autoconfig.playtimer.title": "Playtimer Mod"
+
+  "text.autoconfig.playtimer.title": "Playtimer Mod",
+
+  "text.autoconfig.playtimer.option.colour": "Playtimer Colour",
+  "text.autoconfig.playtimer.option.colour.@Tooltip": "Set colour of timer",
+
+  "text.autoconfig.playtimer.option.playtimerPosition": "Playtimer Position",
+  "text.autoconfig.playtimer.option.playtimerPosition.@Tooltip": "Set position of timer to one of the 4 corners",
+
+  "text.autoconfig.playtimer.option.scalePercentage": "Playtimer Scale (%)",
+  "text.autoconfig.playtimer.option.scalePercentage.@Tooltip": "Set scale of timer (change for different GUI Scales)",
+
+  "text.autoconfig.playtimer.option.caption": "Playtimer Subtitle",
+  "text.autoconfig.playtimer.option.caption.@Tooltip": "Adds text to timer, like the '2nd attempt' in Grian's series",
+
+
+  "playtimer.theme.top_left": "Top Left",
+  "playtimer.theme.top_right": "Top Right",
+  "playtimer.theme.bottom_left": "Bottom Left",
+  "playtimer.theme.bottom_right": "Bottom Right"
 }

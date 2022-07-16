@@ -35,8 +35,6 @@ dependencies {
 
 	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
-	include modImplementation("dev.lambdaurora:spruceui:${project.spruceui_version}")
-
 	modApi("me.shedaniel.cloth:cloth-config-fabric:7.0.73") {exclude(group: "net.fabricmc.fabric-api")}
 }
 

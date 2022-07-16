@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Playtimer",
-  "description": "Play time in bottom-right corner, inspired by Grian/Scar/Joel's Hardcore Series",
+  "description": "Shows your time played in a world, inspired by Grian/Scar/Joel's Hardcore Series",
   "authors": [
     "Bjarno",
     "yellowyears"
@@ -35,7 +35,6 @@
     "fabricloader": ">=0.12.12",
     "fabric": "*",
     "minecraft": "~1.19",
-    "spruceui": ">=3.2.0",
     "java": ">=17"
   },
   "suggests": {
