@@ -18,15 +18,15 @@ checking out this repository! Hopefully you can find it useful. **[Latest Releas
 
 - Custom Colours: 
   - Using ModMenu and ClothConfig, you can set a custom colour hex colour code to change the colour of the timer: 
-  ![Playtimer Custom Colours](src/main/resources/assets/playtimer/github/playtimer_colour.gif)
+  ![Playtimer Custom Colours](.github/assets/playtimer_colour.gif)
 - Position Selector: Places the playtimer in the 4 corners of the screen
 
 # Commands:
 
-- **/playtimer help**: ![Help](src/main/resources/assets/playtimer/github/playtimer_help.gif)
-- **/playtimer toggle**: ![Toggle](src/main/resources/assets/playtimer/github/playtimer_toggle.gif)
-- **/playtimer reset**: ![Reset](src/main/resources/assets/playtimer/github/playtimer_reset2.gif)
-- **/playtimer sync**: ![Sync](src/main/resources/assets/playtimer/github/playtimer_sync.gif)
+- **/playtimer help**: ![Help](.github/assets/playtimer_help.gif)
+- **/playtimer toggle**: ![Toggle](.github/assets/playtimer_toggle.gif)
+- **/playtimer reset**: ![Reset](.github/assets/playtimer_reset2.gif)
+- **/playtimer sync**: ![Sync](.github/assets/playtimer_sync.gif)
 
 # Additional Notes:
 
