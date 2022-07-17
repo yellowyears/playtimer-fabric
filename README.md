@@ -16,10 +16,12 @@ checking out this repository! Hopefully you can find it useful. **[Latest Releas
 
 # Features:
 
-- Custom Colours: 
-  - Using ModMenu and ClothConfig, you can set a custom colour hex colour code to change the colour of the timer: 
-  ![Playtimer Custom Colours](.github/assets/playtimer_colour.gif)
-- Position Selector: Places the playtimer in the 4 corners of the screen
+### ModMenu settings:
+
+- Playtimer Colour: Set a custom colour (hex code): ![Playtimer Colour](.github/assets/playtimer_colour.gif)
+- Playtimer Position: Set the position of the timer to one of the 4 corners: ![Playtimer Position](.github/assets/playtimer_position.gif)
+- Playtimer Scale: Set the scale using the percentage slider (intended for changing scale when on different GUI scales): ![Playtimer Scale](.github/assets/playtimer_scale.gif)
+- Playtimer Caption: Set a custom text to appear next to the timer, like the '2nd Attempt' in Grian's series: ![Playtimer Caption](.github/assets/playtimer_caption.gif)
 
 # Commands:
 
