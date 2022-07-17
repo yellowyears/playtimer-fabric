@@ -34,4 +34,7 @@ public class PlaytimerModConfig implements ConfigData {
     @Tooltip()
     public String caption = "";
 
+    @Tooltip()
+    public boolean useMilliseconds = false;
+
 }

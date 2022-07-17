@@ -19,6 +19,8 @@
   "text.autoconfig.playtimer.option.caption": "Playtimer Subtitle",
   "text.autoconfig.playtimer.option.caption.@Tooltip": "Adds text to timer, like the '2nd attempt' in Grian's series",
 
+  "text.autoconfig.playtimer.option.useMilliseconds": "Use milliseconds",
+  "text.autoconfig.playtimer.option.useMilliseconds.@Tooltip": "Adds milliseconds to the end of the timer",
 
   "playtimer.theme.top_left": "Top Left",
   "playtimer.theme.top_right": "Top Right",

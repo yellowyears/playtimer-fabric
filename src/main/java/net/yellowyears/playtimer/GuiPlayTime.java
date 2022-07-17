@@ -196,6 +196,7 @@ public class GuiPlayTime {
     float xOffset; float yOffset;
     float xOffsetCaption; float yOffsetCaption;
     float maxScale = 5f;
+    String timerFormat = null;
 
     public void render(MatrixStack stack) {
         if (minecraft == null || minecraft.player == null || minecraft.world == null || minecraft.player.world == null) {
@@ -220,19 +221,32 @@ public class GuiPlayTime {
             updateDurationInStorage(duration);
         }
 
-        String hms = String.format("%02d:%02d:%02d",
-                duration.toHours(),
-                duration.toMinutesPart(),
-                duration.toSecondsPart());
+        if(config.useMilliseconds){
+            timerFormat = String.format("%02d:%02d:%02d:%03d",
+                    duration.toHours(),
+                    duration.toMinutesPart(),
+                    duration.toSecondsPart(),
+                    duration.toMillisPart());
+        }
+        else{
+            timerFormat = String.format("%02d:%02d:%02d",
+                    duration.toHours(),
+                    duration.toMinutesPart(),
+                    duration.toSecondsPart());
+        }
 
-        if (forceRefresh) {
-            hms = "??:??:??";
+
+        if (forceRefresh && config.useMilliseconds) {
+            timerFormat = "??:??:??:??";
+        }
+        else if (forceRefresh){
+            timerFormat = "??:??:??";
         }
 
         if (!PlaytimerMod.timerVisible) { return; }
 
         // Draw the text in the bottom right corner of the screen.
-        int xNeed = minecraft.textRenderer.getWidth(hms);
+        int xNeed = minecraft.textRenderer.getWidth(timerFormat);
         int yNeed = minecraft.textRenderer.fontHeight;
         Window mainWindow = minecraft.getWindow();
 
@@ -290,7 +304,7 @@ public class GuiPlayTime {
         int colour = config.colour;
 
         // Render Timer
-        minecraft.textRenderer.drawWithShadow(stack, hms, xPos / scale, yPos / scale, colour);
+        minecraft.textRenderer.drawWithShadow(stack, timerFormat, xPos / scale, yPos / scale, colour);
 
         //Render Caption
         minecraft.textRenderer.drawWithShadow(stack, config.caption, xPosCaption / scale, yPosCaption / scale, colour);
