@@ -27,7 +27,7 @@ checking out this repository! Hopefully you can find it useful. **[Latest Releas
 
 - **/playtimer help**: ![Help](.github/assets/playtimer_help.gif)
 - **/playtimer toggle**: ![Toggle](.github/assets/playtimer_toggle.gif)
-- **/playtimer reset**: ![Reset](.github/assets/playtimer_reset2.gif)
+- **/playtimer reset**: ![Reset](.github/assets/playtimer_reset.gif)
 - **/playtimer sync**: ![Sync](.github/assets/playtimer_sync.gif)
 
 # Additional Notes:

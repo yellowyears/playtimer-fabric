@@ -238,11 +238,6 @@ public class GuiPlayTime {
 
         int xNeedCaption = minecraft.textRenderer.getWidth(config.caption);
 
-        // Prevent crash when config changes
-        if(config.playtimerPosition == null) {
-            config.playtimerPosition = PlaytimerModConfig.PlaytimerPosition.BOTTOM_RIGHT;
-        }
-
         int scalePercentage = config.scalePercentage;
         float scale = (scalePercentage * maxScale) / 100;
 

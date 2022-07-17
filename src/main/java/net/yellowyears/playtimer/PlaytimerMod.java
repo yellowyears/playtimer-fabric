@@ -1,7 +1,7 @@
 package net.yellowyears.playtimer;
 
 import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
+import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.api.ModInitializer;
@@ -45,7 +45,7 @@ public class PlaytimerMod implements ModInitializer {
 			);
 		});
 
-		AutoConfig.register(PlaytimerModConfig.class, Toml4jConfigSerializer::new);
+		AutoConfig.register(PlaytimerModConfig.class, GsonConfigSerializer::new);
 
 		loadVisible();
 	}
