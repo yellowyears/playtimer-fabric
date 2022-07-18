@@ -301,13 +301,11 @@ public class GuiPlayTime {
         int xPos = Math.round((mainWindow.getScaledWidth() - xNeed * scale) * xOffset);
         int yPos = Math.round((mainWindow.getScaledHeight() - yNeed * scale) * yOffset);
 
-        int colour = config.colour;
-
         // Render Timer
-        minecraft.textRenderer.drawWithShadow(stack, timerFormat, xPos / scale, yPos / scale, colour);
+        minecraft.textRenderer.drawWithShadow(stack, timerFormat, xPos / scale, yPos / scale, config.playtimerColour);
 
         //Render Caption
-        minecraft.textRenderer.drawWithShadow(stack, config.caption, xPosCaption / scale, yPosCaption / scale, colour);
+        minecraft.textRenderer.drawWithShadow(stack, config.caption, xPosCaption / scale, yPosCaption / scale, config.captionColour);
 
         stack.pop();
     }
