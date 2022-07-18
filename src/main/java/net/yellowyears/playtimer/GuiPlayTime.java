@@ -235,7 +235,6 @@ public class GuiPlayTime {
                     duration.toSecondsPart());
         }
 
-
         if (forceRefresh && config.useMilliseconds) {
             timerFormat = "??:??:??:??";
         }
