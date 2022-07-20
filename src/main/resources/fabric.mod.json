@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "playtimer",
   "version": "${version}",
-
   "name": "Playtimer",
   "description": "Shows your time played in a world, inspired by Grian/Scar/Joel's Hardcore Series",
   "authors": [
@@ -18,7 +17,7 @@
   "license": "MIT",
   "icon": "assets/playtimer/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "main": [
       "net.yellowyears.playtimer.PlaytimerMod"
