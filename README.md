@@ -9,10 +9,17 @@ checking out this repository! Hopefully you can find it useful. **[Latest Releas
 
 ### Table of Contents:
 
+[Releases](#releases)
 [Features](#features)   
 [Commands](#commands)   
 [Additional Notes](#additional-notes)  
 [License](#license)   
+
+# Releases
+
+| Minecraft Version | Playtimer Latest Release                                                                  |
+|-------------------|-------------------------------------------------------------------------------------------|
+| 1.19              | [1.3.1-1.19](https://github.com/yellowyears/playtimer-fabric/releases/tag/1.3.1-1.19)     |
 
 # Features:
 
