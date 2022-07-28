@@ -20,6 +20,7 @@ checking out this repository! Hopefully you can find it useful. **[Latest Releas
 | Minecraft Version | Playtimer Latest Release                                                                  |
 |-------------------|-------------------------------------------------------------------------------------------|
 | 1.19              | [1.3.1-1.19](https://github.com/yellowyears/playtimer-fabric/releases/tag/1.3.1-1.19)     |
+| 1.19.1            | [1.3.1-1.19.1](https://github.com/yellowyears/playtimer-fabric/releases/tag/1.3.1-1.19.1) |
 
 # Features:
 
