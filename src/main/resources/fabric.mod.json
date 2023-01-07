@@ -29,11 +29,10 @@
   "mixins": [
     "playtimer.mixins.json"
   ],
-
   "depends": {
-    "fabricloader": ">=0.12.12",
-    "fabric": "*",
-    "minecraft": "~1.19",
+    "fabricloader": ">=0.14.11",
+    "fabric-api": "*",
+    "minecraft": "~1.19.3",
     "java": ">=17"
   },
   "suggests": {
