@@ -1,5 +1,6 @@
 package net.yellowyears.playtimer;
 
+import net.minecraft.client.gui.DrawContext;
 import org.slf4j.Logger;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -198,12 +199,14 @@ public class GuiPlayTime {
     float maxScale = 5f;
     String timerFormat = null;
 
-    public void render(MatrixStack stack) {
-        if (minecraft == null || minecraft.player == null || minecraft.world == null || minecraft.player.world == null) {
+    public void render(DrawContext context) {
+        if (minecraft == null || minecraft.player == null || minecraft.world == null || minecraft.player.getWorld() == null) {
             return;
         }
 
         init();
+
+        MatrixStack stack = context.getMatrices();
 
         Duration duration = getPlayTime();
 
@@ -301,10 +304,10 @@ public class GuiPlayTime {
         int yPos = Math.round((mainWindow.getScaledHeight() - yNeed * scale) * yOffset);
 
         // Render Timer
-        minecraft.textRenderer.drawWithShadow(stack, timerFormat, xPos / scale, yPos / scale, config.playtimerColour);
+        context.drawTextWithShadow(minecraft.textRenderer, timerFormat, (int) (xPos / scale), (int) (yPos / scale), config.playtimerColour);
 
         //Render Caption
-        minecraft.textRenderer.drawWithShadow(stack, config.caption, xPosCaption / scale, yPosCaption / scale, config.captionColour);
+        context.drawTextWithShadow(minecraft.textRenderer, config.caption, (int) (xPosCaption / scale), (int) (yPosCaption / scale), config.captionColour);
 
         stack.pop();
     }
