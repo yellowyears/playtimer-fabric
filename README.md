@@ -24,6 +24,8 @@ checking out this repository! Hopefully you can find it useful. **[Latest Releas
 | 1.19.2            | [1.3.1-1.19.2](https://github.com/yellowyears/playtimer-fabric/releases/tag/1.3.1-1.19.2) |
 | 1.19.3            | [1.3.1-1.19.3](https://github.com/yellowyears/playtimer-fabric/releases/tag/1.3.1-1.19.3) |
 | 1.19.4            | [1.3.1-1.19.4](https://github.com/yellowyears/playtimer-fabric/releases/tag/1.3.1-1.19.4) |
+| 1.20              | [1.3.1-1.20](https://github.com/yellowyears/playtimer-fabric/releases/tag/1.3.1-1.20)     |
+| 1.20.1            | [1.3.1-1.20.1](https://github.com/yellowyears/playtimer-fabric/releases/tag/1.3.1-1.20.1) |
 
 # Features:
 
