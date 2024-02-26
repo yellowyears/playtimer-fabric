@@ -142,7 +142,7 @@ public class GuiPlayTime {
         if (minecraft.player != null) {
             GameProfile profile = minecraft.player.getGameProfile();
             if (profile == null) {
-                playerName = minecraft.player.getEntityName();
+                playerName = minecraft.player.getName().toString();
             } else {
                 playerName = profile.getId().toString();
             }
